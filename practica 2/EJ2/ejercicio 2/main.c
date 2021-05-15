@@ -1,8 +1,6 @@
 #include <avr/io.h>
 #include "lcd.h"
 #include "key.h"
-
-
 #include <util/delay.h>
 
 void testearTeclado(void)
@@ -17,13 +15,19 @@ void testearTeclado(void)
 				LCDsendChar(tecla);
 			}
 			_delay_ms(10);
-		}
-	
+		}	
 }
 
+void testeoLCD(void)
+{
+			LCDinit();
+			LCDGotoXY(0,0);
+			uint8_t texto[20]="testeo";
+			LCDstring(texto,20);	;
+}
 int main(void)
 {
-	testearTeclado();
+	testeoLCD();
 	return 0;
 }
 
