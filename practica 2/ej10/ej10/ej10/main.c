@@ -8,25 +8,34 @@
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
+volatile uint8_t cont;
 
 int main()
 {
-	DDRB |= 0x20;	
+	DDRB |= 0x01;	
+	cont=0;
+	//OCR0A=125;				//Comparador, cuando el contador sea igual a 125 ocurre la señal del comparador
+	//TCCR0A=0x02;			//Modo CTC, clk interno, con preescalador
+	TCCR0A=0x00;			//Modo Normal, CLK interno, con preescalador de 1024
+	TCCR0B=0x05;
+	TIFR0=0x01;				//notificacion cuando hay overflow
 	
-	OCR0A=125;				//Comparador, cuando el contador sea igual a 125 ocurre la señal del comparador
-	TCCR0A=0x02;			//Modo CTC, clk interno, con preescalador
-	TCCR0B=0x03;
-	
-	TIMSK0=(1<< OCIE0A);	//Habilita la interrupcion cuando el contador llega a igualar el comparador 
+	//TIMSK0=(1<< OCIE0A);	//Habilita la interrupcion cuando el contador llega a igualar el comparador 
+	TIMSK0=(1<< TOIE0);		//Habilita la interrupcion cuando el contador hace overflow
 	sei();
 	
 	DDRC=0x00;
 	DDRD=0xFF;
-    while (1){}			//Super loop
+    while (1){
+		 if(cont>=3){
+			 cont=0;
+			 PORTB^=0x01; // OR exclusiba el bit 0 del puerto B
+		 }	
+	}			//Super loop
 
 }
 
-	ISR(TIMER0_COMPA_vect)	//El vector de interrupcion es la comparacion del "Canal A" del "Timer 0"
+	ISR(TIMER0_OVF_vect)	//El vector de interrupcion es la comparacion del "Canal A" del "Timer 0"
 	{
-		PORTB^= 0x01;		// OR exclusiba el bit 0 del puerto B
+		 cont=cont+1;		
 	}
