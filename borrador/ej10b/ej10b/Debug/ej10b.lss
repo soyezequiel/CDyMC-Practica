@@ -1,0 +1,218 @@
+
+ej10b.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00800100  00000192  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         0000011e  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000001  00800100  00800100  00000192  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000192  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000001c4  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000088  00000000  00000000  00000204  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000872  00000000  00000000  0000028c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000730  00000000  00000000  00000afe  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   0000039c  00000000  00000000  0000122e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  000000ec  00000000  00000000  000015cc  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    000004a4  00000000  00000000  000016b8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    0000009e  00000000  00000000  00001b5c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000068  00000000  00000000  00001bfa  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   8:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  10:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  14:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  18:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  1c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  20:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  24:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  28:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  2c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  30:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  34:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  38:	0c 94 81 00 	jmp	0x102	; 0x102 <__vector_14>
+  3c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  40:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  44:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  48:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  4c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  50:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  54:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  58:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  5c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  60:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  64:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_clear_bss>:
+  74:	21 e0       	ldi	r18, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	01 c0       	rjmp	.+2      	; 0x7e <.do_clear_bss_start>
+
+0000007c <.do_clear_bss_loop>:
+  7c:	1d 92       	st	X+, r1
+
+0000007e <.do_clear_bss_start>:
+  7e:	a1 30       	cpi	r26, 0x01	; 1
+  80:	b2 07       	cpc	r27, r18
+  82:	e1 f7       	brne	.-8      	; 0x7c <.do_clear_bss_loop>
+  84:	0e 94 48 00 	call	0x90	; 0x90 <main>
+  88:	0c 94 8d 00 	jmp	0x11a	; 0x11a <_exit>
+
+0000008c <__bad_interrupt>:
+  8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000090 <main>:
+ */ 
+
+#include "TIMER.h"
+#define F_CPU 8000000L
+int main(void){
+	DDRB=0x01;
+  90:	81 e0       	ldi	r24, 0x01	; 1
+  92:	84 b9       	out	0x04, r24	; 4
+	
+	while(1){
+		TIMER_retardo_us(100);
+  94:	84 e6       	ldi	r24, 0x64	; 100
+  96:	0e 94 76 00 	call	0xec	; 0xec <TIMER_retardo_us>
+		PORTB^=0x01;
+  9a:	95 b1       	in	r25, 0x05	; 5
+  9c:	81 e0       	ldi	r24, 0x01	; 1
+  9e:	89 27       	eor	r24, r25
+  a0:	85 b9       	out	0x05, r24	; 5
+  a2:	f8 cf       	rjmp	.-16     	; 0x94 <main+0x4>
+
+000000a4 <TIMER0_modo_CTC_CLK_interno>:
+}
+void TIMER0_preescaler_8(){
+	TCCR0B=0x02;
+}
+void TIMER0_no_preescaler(){
+	TCCR0B=0x01;
+  a4:	82 e0       	ldi	r24, 0x02	; 2
+  a6:	84 bd       	out	0x24, r24	; 36
+  a8:	08 95       	ret
+
+000000aa <TIMER0_preescaler_8>:
+  aa:	82 e0       	ldi	r24, 0x02	; 2
+  ac:	85 bd       	out	0x25, r24	; 37
+  ae:	08 95       	ret
+
+000000b0 <calcular_ciclos_para_1us>:
+long int calcular_ciclos_para_1us(){
+		long int ciclos=F_CPU/1000;
+		ciclos=ciclos/1000;
+		ciclos/=8;
+		return ciclos;
+}
+  b0:	61 e0       	ldi	r22, 0x01	; 1
+  b2:	70 e0       	ldi	r23, 0x00	; 0
+  b4:	80 e0       	ldi	r24, 0x00	; 0
+  b6:	90 e0       	ldi	r25, 0x00	; 0
+  b8:	08 95       	ret
+
+000000ba <TIMER0_activar_bandera_de_notificacion_en_overflow>:
+void TIMER0_activar_bandera_de_notificacion_en_overflow(){
+	TIFR0=(1<< OCF0A);
+  ba:	82 e0       	ldi	r24, 0x02	; 2
+  bc:	85 bb       	out	0x15, r24	; 21
+  be:	08 95       	ret
+
+000000c0 <TIMER0_configurar_interrupcion_cuando_el_contador_llega_a_igualar_el_comparador>:
+}
+void TIMER0_configurar_interrupcion_cuando_el_contador_llega_a_igualar_el_comparador(){
+	TIMSK0=(1<< OCIE0A);
+  c0:	82 e0       	ldi	r24, 0x02	; 2
+  c2:	80 93 6e 00 	sts	0x006E, r24	; 0x80006e <__TEXT_REGION_LENGTH__+0x7f806e>
+  c6:	08 95       	ret
+
+000000c8 <TIMER0_interrupt_1us_init>:
+}
+void TIMER0_interrupt_1us_init(uint8_t tiempo){
+  c8:	cf 93       	push	r28
+  ca:	c8 2f       	mov	r28, r24
+	TIMER0_modo_CTC_CLK_interno();
+  cc:	0e 94 52 00 	call	0xa4	; 0xa4 <TIMER0_modo_CTC_CLK_interno>
+	TIMER0_preescaler_8();
+  d0:	0e 94 55 00 	call	0xaa	; 0xaa <TIMER0_preescaler_8>
+	OCR0A=(uint8_t) calcular_ciclos_para_1us()*tiempo;  //OCR0A es el registro comparador que al igualarse con el contador se reinicia el contador
+  d4:	0e 94 58 00 	call	0xb0	; 0xb0 <calcular_ciclos_para_1us>
+  d8:	6c 9f       	mul	r22, r28
+  da:	60 2d       	mov	r22, r0
+  dc:	11 24       	eor	r1, r1
+  de:	67 bd       	out	0x27, r22	; 39
+	TIMER0_activar_bandera_de_notificacion_en_overflow();
+  e0:	0e 94 5d 00 	call	0xba	; 0xba <TIMER0_activar_bandera_de_notificacion_en_overflow>
+	TIMER0_configurar_interrupcion_cuando_el_contador_llega_a_igualar_el_comparador();	
+  e4:	0e 94 60 00 	call	0xc0	; 0xc0 <TIMER0_configurar_interrupcion_cuando_el_contador_llega_a_igualar_el_comparador>
+}
+  e8:	cf 91       	pop	r28
+  ea:	08 95       	ret
+
+000000ec <TIMER_retardo_us>:
+
+void TIMER_retardo_us(uint8_t Tiempo_a_cumplir)
+{
+	//ms_transcurridos=0;
+	TIMER0_interrupt_1us_init(Tiempo_a_cumplir);	
+  ec:	0e 94 64 00 	call	0xc8	; 0xc8 <TIMER0_interrupt_1us_init>
+	sei();
+  f0:	78 94       	sei
+	us_cumplido=1;
+  f2:	81 e0       	ldi	r24, 0x01	; 1
+  f4:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
+	while (us_cumplido){}			
+  f8:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+  fc:	81 11       	cpse	r24, r1
+  fe:	fc cf       	rjmp	.-8      	; 0xf8 <TIMER_retardo_us+0xc>
+}
+ 100:	08 95       	ret
+
+00000102 <__vector_14>:
+
+ISR(TIMER0_COMPA_vect)	//El vector de interrupcion es la comparacion del "Canal A" del "Timer 0"
+{
+ 102:	1f 92       	push	r1
+ 104:	0f 92       	push	r0
+ 106:	0f b6       	in	r0, 0x3f	; 63
+ 108:	0f 92       	push	r0
+ 10a:	11 24       	eor	r1, r1
+	us_cumplido=0;
+ 10c:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 110:	0f 90       	pop	r0
+ 112:	0f be       	out	0x3f, r0	; 63
+ 114:	0f 90       	pop	r0
+ 116:	1f 90       	pop	r1
+ 118:	18 95       	reti
+
+0000011a <_exit>:
+ 11a:	f8 94       	cli
+
+0000011c <__stop_program>:
+ 11c:	ff cf       	rjmp	.-2      	; 0x11c <__stop_program>
