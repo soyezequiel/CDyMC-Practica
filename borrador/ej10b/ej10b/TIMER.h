@@ -11,4 +11,5 @@
 #endif
 
 #define 
-void TIMER_retardo_us(uint8_t Tiempo_a_cumplir); //Genera un retardo de x micro segundos
+void TIMER_retardo_us(uint8_t Tiempo_a_cumplir); //Genera un retardo de x
+// micro segundos
